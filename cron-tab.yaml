@@ -1,0 +1,4 @@
+jobs:
+  - name: Job name
+    schedule: "* * * * * *"
+    command: "echo Hello World!"
