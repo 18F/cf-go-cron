@@ -18,13 +18,13 @@ type cronjob struct {
 	Command  string `yaml:"command"`
 }
 
-// CronJobs is a collection of jobs
-type CronJobs struct {
+// CronTab is a collection of jobs
+type CronTab struct {
 	Jobs []cronjob `yaml:"jobs"`
 }
 
-func loadCronJobs() CronJobs {
-	var jobs CronJobs
+func loadCronJobs() CronTab {
+	var jobs CronTab
 	data, err := ioutil.ReadFile("cron-tab.yaml")
 	if err != nil {
 		log.Fatalf("error: %v", err)
@@ -45,14 +45,16 @@ func main() {
 	jobs := loadCronJobs()
 	c := cron.New()
 	for _, job := range jobs.Jobs {
-		c.AddFunc(job.Schedule, func() {
-			log.Println("Running: " + job.Name)
-			cmd := stringToCommand(job.Command)
-			err := cmd.Run()
-			if err != nil {
-				log.Fatal(err)
-			}
-		})
+		func(job cronjob) {
+			c.AddFunc(job.Schedule, func() {
+				log.Println("Running: " + job.Name)
+				cmd := stringToCommand(job.Command)
+				err := cmd.Run()
+				if err != nil {
+					log.Fatal(err)
+				}
+			})
+		}(job)
 	}
 	c.Start()
 

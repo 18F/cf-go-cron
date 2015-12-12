@@ -1,0 +1,10 @@
+jobs:
+  - name: Job name 1
+    schedule: "* * * * * *"
+    command: "echo Hello World!"
+  - name: Job name 2
+    schedule: "*/1 * * * * *"
+    command: "echo Hello World!"
+  - name: Job name 3
+    schedule: "*/3 * * * * *"
+    command: "echo Hello World!"
