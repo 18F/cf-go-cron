@@ -48,11 +48,11 @@ func main() {
 		func(job cronjob) {
 			c.AddFunc(job.Schedule, func() {
 				log.Println("Running: " + job.Name)
-				cmd := stringToCommand(job.Command)
-				err := cmd.Run()
+				out, err := stringToCommand(job.Command).Output()
 				if err != nil {
 					log.Fatal(err)
 				}
+				log.Printf("%s", out)
 			})
 		}(job)
 	}

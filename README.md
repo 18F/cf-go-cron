@@ -19,12 +19,5 @@ jobs:
     command: "echo Hello World!"
 ```
 
-If the job has other language dependencies make sure to list their buildpacks in the `.buildpacks` yaml
-```yaml
-# An app the run an npm package
-https://github.com/cloudfoundry/nodejs-buildpack
-https://github.com/cloudfoundry/go-buildpack.git
-```
-
 Push to Cloud Foundry
 `cf push`
