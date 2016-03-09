@@ -1,4 +1,4 @@
-# Could Foundry Go Cron App
+# Cloud Foundry Go Cron App
 An application for running cron jobs in a Cloud Foundry app.
 
 # Usage
